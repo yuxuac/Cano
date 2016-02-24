@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cano.Test", "Cano.Test\Cano.Test.csproj", "{64DF0DF2-33AC-484F-809A-EBA8C2831E57}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cano.ToolSet", "Cano.ToolSet\Cano.ToolSet.csproj", "{52758AE3-EF89-45F2-9FDE-DAD9D213E6AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cano.Test2", "Cano.Test2\Cano.Test2.csproj", "{C88EE29D-AC1F-47A5-BB6C-067FF6A16C2C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{64DF0DF2-33AC-484F-809A-EBA8C2831E57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64DF0DF2-33AC-484F-809A-EBA8C2831E57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64DF0DF2-33AC-484F-809A-EBA8C2831E57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64DF0DF2-33AC-484F-809A-EBA8C2831E57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52758AE3-EF89-45F2-9FDE-DAD9D213E6AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52758AE3-EF89-45F2-9FDE-DAD9D213E6AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52758AE3-EF89-45F2-9FDE-DAD9D213E6AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52758AE3-EF89-45F2-9FDE-DAD9D213E6AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C88EE29D-AC1F-47A5-BB6C-067FF6A16C2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C88EE29D-AC1F-47A5-BB6C-067FF6A16C2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C88EE29D-AC1F-47A5-BB6C-067FF6A16C2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C88EE29D-AC1F-47A5-BB6C-067FF6A16C2C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
