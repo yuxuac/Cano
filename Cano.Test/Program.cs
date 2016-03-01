@@ -12,8 +12,8 @@ namespace Cano.Test
         {
             List<TestItem> items = new List<TestItem>() 
             { 
-                new TestItem(){ Age = 1, Name = "aa", Price = 11.1f, Score = 22.2m, Value = 33.3},
-                new TestItem(){ Age = 2, Name = "bb", Price = 11.1f, Score = 22.2m, Value = 33.3},
+                new TestItem(){ Age = 1, Name = "aa", Price = 11.1f, Score = 22.2m, Value = 33.3, A = AA.A, Item = new SubTestItem(){ Name = "K1" }},
+                new TestItem(){ Age = 2, Name = "bb", Price = 11.1f, Score = 22.2m, Value = 33.3, A = null, Item = new SubTestItem(){ Name = "K2" }}
             };
 
             string str = Serializer.SerializeJSON<List<TestItem>>(items);
@@ -28,6 +28,7 @@ namespace Cano.Test
         }
     }
 
+    [Serializable]
     public class TestItem
     {
         public string Name { get; set; }
@@ -35,6 +36,15 @@ namespace Cano.Test
         public decimal Score { get; set; }
         public float? Price { get; set; }
         public Double Value { get; set; }
+
+        public AA? A { get; set; }
+        public SubTestItem Item { get; set; }
+    }
+
+    [Serializable]
+    public class SubTestItem 
+    {
+        public string Name { get; set; }
     }
 
     public enum AA
