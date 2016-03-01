@@ -34,6 +34,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="RedisBoost">
+      <HintPath>..\packages\RedisBoost.1.6.4\lib\net40\RedisBoost.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -45,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Const.cs" />
     <Compile Include="IO.cs" />
+    <Compile Include="Redis.cs" />
     <Compile Include="Serializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
