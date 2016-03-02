@@ -44,6 +44,7 @@ namespace Cano.Test2
         public void SaveSetAsync()
         {
             var task = Client.SaveSetAsync("SetAsync_1", CustomItems.ToArray());
+            task.Wait();
             task.ContinueWith(res =>
             {
                 Console.WriteLine("Affect items:" + res.Result);
@@ -62,12 +63,40 @@ namespace Cano.Test2
         public void GetSetAsync()
         {
             var items2 = Client.GetSetAsync<CustomClass>("SetAsync_1");
+            items2.Wait();
             items2.ContinueWith(res =>
             {
                 Console.WriteLine("Affect items:" + res.Result.Count());
             });
             Console.WriteLine("Getting...");
         }
+
+        [TestMethod]
+        public void SetAsync()
+        {
+            var item = new CustomClass() { ID = 1, Name = "test" };
+
+            var items2 = Client.SetAsync("setItem_1", item);
+            items2.Wait();
+            items2.ContinueWith(res =>
+            {
+                Console.WriteLine("Affect items:" + res.Result.Count());
+            });
+            Console.WriteLine("Getting...");
+        }
+
+        [TestMethod]
+        public void GetAsync()
+        {
+            var items2 = Client.GetAsync("setItem_1");
+            items2.Wait();
+            items2.ContinueWith(res =>
+            {
+                Console.WriteLine("Affect items:" + res.Result.As<CustomClass>());
+            });
+            Console.WriteLine("Getting...");
+        }
+
     }
 
     public class CustomClass
@@ -75,5 +104,10 @@ namespace Cano.Test2
         public int ID { get; set; }
 
         public string Name { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("{0}-{1}", ID, Name ?? string.Empty);
+        }
     }
 }
