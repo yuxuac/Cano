@@ -132,125 +132,154 @@ namespace Cano.ToolSet
             return items.ToArray<T>();
         }
 
-        #endregion
-    }
-
-    public class JsonSerializer : BasicRedisSerializer
-    {
-        internal static readonly byte[] Null = new byte[] { 0 };
-        internal const string DatetimeFormat = "yyyy-MM-dd'T'HH:mm:ss.fffffff";
-
-        #region Serialization
-
-        public override byte[] Serialize(object value)
+        /// <summary>
+        /// 得到指定Key中的值
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="redisClient"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public static T Get<T>(this IRedisClient redisClient, string key)
         {
-            if (value == null) return Null;
-
-            var type = value.GetType();
-
-            if (type == typeof(string))
-                return SerializeString(value.ToString());
-            if (type == typeof(byte[]))
-                return value as byte[];
-            if (type.IsEnum)
-                return SerializeString(value.ToString());
-            if (type == typeof(DateTime))
-                return SerializeString((value as IFormattable).ToString(DatetimeFormat, CultureInfo.InvariantCulture));
-            if (type == typeof(Guid))
-                return SerializeString(value.ToString());
-            if (type == typeof(int) || type == typeof(long) || type == typeof(byte) || type == typeof(short) ||
-                type == typeof(uint) || type == typeof(ulong) || type == typeof(sbyte) || type == typeof(ushort) ||
-                type == typeof(bool) || type == typeof(decimal) || type == typeof(double) || type == typeof(char))
-                return SerializeString((value as IConvertible).ToString(CultureInfo.InvariantCulture));
-
-            var result = SerializeComplexValue(value);
-
-            if (result.SequenceEqual(Null))
-                throw new SerializationException("Serializer returned unexpected result. byte[]{0} value is reserved for NULL");
-
-            return result;
+            var task = redisClient.GetAsync(key);
+            task.Wait();
+            return task.Result.As<T>();
         }
 
-        protected virtual byte[] SerializeComplexValue(object value)
+        /// <summary>
+        /// 添加（覆盖）Key和Value.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="redisClient"></param>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static string Set<T>(this IRedisClient redisClient, string key, T value)
         {
-            string json = JsonConvert.SerializeObject(value);
-            return Encoding.UTF8.GetBytes(json);
+            var task = redisClient.SetAsync<T>(key, value);
+            task.Wait();
+            return task.Result;
         }
 
         #endregion
 
-        #region Deserialization
-
-        public override object Deserialize(Type type, byte[] value)
+        internal class JsonSerializer : BasicRedisSerializer
         {
-            if (value == null || value.SequenceEqual(Null)) return null;
+            internal static readonly byte[] Null = new byte[] { 0 };
+            internal const string DatetimeFormat = "yyyy-MM-dd'T'HH:mm:ss.fffffff";
 
-            if (type == typeof(string))
-                return DeserializeToString(value);
-            if (type == typeof(byte[]))
-                return value;
-            if (type.IsEnum)
-                return DeserializeToEnum(DeserializeToString(value), type);
-            if (type == typeof(DateTime))
-                return DateTime.ParseExact(DeserializeToString(value), DatetimeFormat, CultureInfo.InvariantCulture);
-            if (type == typeof(Guid))
-                return Guid.Parse(DeserializeToString(value));
-            if (type == typeof(int))
-                return int.Parse(DeserializeToString(value), CultureInfo.InvariantCulture);
-            if (type == typeof(long))
-                return long.Parse(DeserializeToString(value), CultureInfo.InvariantCulture);
-            if (type == typeof(byte))
-                return byte.Parse(DeserializeToString(value), CultureInfo.InvariantCulture);
-            if (type == typeof(short))
-                return short.Parse(DeserializeToString(value), CultureInfo.InvariantCulture);
-            if (type == typeof(uint))
-                return uint.Parse(DeserializeToString(value), CultureInfo.InvariantCulture);
-            if (type == typeof(ulong))
-                return ulong.Parse(DeserializeToString(value), CultureInfo.InvariantCulture);
-            if (type == typeof(sbyte))
-                return sbyte.Parse(DeserializeToString(value), CultureInfo.InvariantCulture);
-            if (type == typeof(ushort))
-                return ushort.Parse(DeserializeToString(value), CultureInfo.InvariantCulture);
-            if (type == typeof(bool))
-                return bool.Parse(DeserializeToString(value));
-            if (type == typeof(decimal))
-                return decimal.Parse(DeserializeToString(value), CultureInfo.InvariantCulture);
-            if (type == typeof(double))
-                return double.Parse(DeserializeToString(value), CultureInfo.InvariantCulture);
-            if (type == typeof(char))
-                return DeserializeToString(value)[0];
+            #region Serialization
 
-            return DeserializeComplexValue(type, value);
-        }
-
-        protected override object DeserializeComplexValue(Type type, byte[] value)
-        {
-            string json = Encoding.UTF8.GetString(value);
-            return JsonConvert.DeserializeObject(json, type);
-        }
-
-        #endregion
-
-        private static object DeserializeToEnum(string value, Type enumType)
-        {
-            try
+            public override byte[] Serialize(object value)
             {
-                return Enum.Parse(enumType, value, true);
+                if (value == null) return Null;
+
+                var type = value.GetType();
+
+                if (type == typeof(string))
+                    return SerializeString(value.ToString());
+                if (type == typeof(byte[]))
+                    return value as byte[];
+                if (type.IsEnum)
+                    return SerializeString(value.ToString());
+                if (type == typeof(DateTime))
+                    return SerializeString((value as IFormattable).ToString(DatetimeFormat, CultureInfo.InvariantCulture));
+                if (type == typeof(Guid))
+                    return SerializeString(value.ToString());
+                if (type == typeof(int) || type == typeof(long) || type == typeof(byte) || type == typeof(short) ||
+                    type == typeof(uint) || type == typeof(ulong) || type == typeof(sbyte) || type == typeof(ushort) ||
+                    type == typeof(bool) || type == typeof(decimal) || type == typeof(double) || type == typeof(char))
+                    return SerializeString((value as IConvertible).ToString(CultureInfo.InvariantCulture));
+
+                var result = SerializeComplexValue(value);
+
+                if (result.SequenceEqual(Null))
+                    throw new SerializationException("Serializer returned unexpected result. byte[]{0} value is reserved for NULL");
+
+                return result;
             }
-            catch (Exception ex)
+
+            protected virtual byte[] SerializeComplexValue(object value)
             {
-                throw new SerializationException("Invalid enum value. Enum type: " + enumType.Name, ex);
+                string json = JsonConvert.SerializeObject(value);
+                return Encoding.UTF8.GetBytes(json);
             }
-        }
 
-        private static byte[] SerializeString(string value)
-        {
-            return Encoding.UTF8.GetBytes(value);
-        }
+            #endregion
 
-        private static string DeserializeToString(byte[] value)
-        {
-            return Encoding.UTF8.GetString(value);
+            #region Deserialization
+
+            public override object Deserialize(Type type, byte[] value)
+            {
+                if (value == null || value.SequenceEqual(Null)) return null;
+
+                if (type == typeof(string))
+                    return DeserializeToString(value);
+                if (type == typeof(byte[]))
+                    return value;
+                if (type.IsEnum)
+                    return DeserializeToEnum(DeserializeToString(value), type);
+                if (type == typeof(DateTime))
+                    return DateTime.ParseExact(DeserializeToString(value), DatetimeFormat, CultureInfo.InvariantCulture);
+                if (type == typeof(Guid))
+                    return Guid.Parse(DeserializeToString(value));
+                if (type == typeof(int))
+                    return int.Parse(DeserializeToString(value), CultureInfo.InvariantCulture);
+                if (type == typeof(long))
+                    return long.Parse(DeserializeToString(value), CultureInfo.InvariantCulture);
+                if (type == typeof(byte))
+                    return byte.Parse(DeserializeToString(value), CultureInfo.InvariantCulture);
+                if (type == typeof(short))
+                    return short.Parse(DeserializeToString(value), CultureInfo.InvariantCulture);
+                if (type == typeof(uint))
+                    return uint.Parse(DeserializeToString(value), CultureInfo.InvariantCulture);
+                if (type == typeof(ulong))
+                    return ulong.Parse(DeserializeToString(value), CultureInfo.InvariantCulture);
+                if (type == typeof(sbyte))
+                    return sbyte.Parse(DeserializeToString(value), CultureInfo.InvariantCulture);
+                if (type == typeof(ushort))
+                    return ushort.Parse(DeserializeToString(value), CultureInfo.InvariantCulture);
+                if (type == typeof(bool))
+                    return bool.Parse(DeserializeToString(value));
+                if (type == typeof(decimal))
+                    return decimal.Parse(DeserializeToString(value), CultureInfo.InvariantCulture);
+                if (type == typeof(double))
+                    return double.Parse(DeserializeToString(value), CultureInfo.InvariantCulture);
+                if (type == typeof(char))
+                    return DeserializeToString(value)[0];
+
+                return DeserializeComplexValue(type, value);
+            }
+
+            protected override object DeserializeComplexValue(Type type, byte[] value)
+            {
+                string json = Encoding.UTF8.GetString(value);
+                return JsonConvert.DeserializeObject(json, type);
+            }
+
+            #endregion
+
+            private static object DeserializeToEnum(string value, Type enumType)
+            {
+                try
+                {
+                    return Enum.Parse(enumType, value, true);
+                }
+                catch (Exception ex)
+                {
+                    throw new SerializationException("Invalid enum value. Enum type: " + enumType.Name, ex);
+                }
+            }
+
+            private static byte[] SerializeString(string value)
+            {
+                return Encoding.UTF8.GetBytes(value);
+            }
+
+            private static string DeserializeToString(byte[] value)
+            {
+                return Encoding.UTF8.GetString(value);
+            }
         }
     }
 }

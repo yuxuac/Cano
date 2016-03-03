@@ -97,6 +97,18 @@ namespace Cano.Test2
             Console.WriteLine("Getting...");
         }
 
+        [TestMethod]
+        public void GetSync()
+        {
+            Client.Set<decimal>("SetTest_001", 12.01m);
+
+            var item1 = Client.Get<decimal?>("SetTest_001");
+            Assert.AreEqual(item1, 12.01m);
+
+            var item2 = Client.Get<decimal?>("SetTest_002");
+            Assert.AreEqual(item2, null);
+        }
+
     }
 
     public class CustomClass
