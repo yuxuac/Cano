@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,16 @@ namespace Cano
         /// 得到当前时间格式化字符串
         /// </summary>
         public static DT DateTime = new DT();
+
+        /// <summary>
+        /// 得到当前路径
+        /// </summary>
+        public static string BaseDirectory = System.AppDomain.CurrentDomain.BaseDirectory;
+
+        /// <summary>
+        /// GiveMeATxtFile
+        /// </summary>
+        public static string GiveMeATxtFile = Path.Combine(BaseDirectory, DateTime.Format1 + ".txt");
     }
 
     /// <summary>
