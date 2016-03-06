@@ -4,8 +4,11 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Xml.Serialization;
 
-namespace Cano.ToolSet
+namespace Cano
 {
+    /// <summary>
+    /// Cano: Serialization API
+    /// </summary>
     public class Serializer
     {
         #region 序列化，反序列化 - Byte[]

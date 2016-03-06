@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Cano.ToolSet;
+using Cano;
 using System.Collections.Generic;
 
 namespace Cano.Test2

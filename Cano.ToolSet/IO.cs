@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Cano
 {
+    /// <summary>
+    /// Cano: I/O API
+    /// </summary>
     public class IO
     {
         public static void WritePlainText(string content, string file, bool append = false)

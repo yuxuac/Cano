@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Cano
 {
     /// <summary>
-    /// Consts
+    /// Cano: Consts
     /// </summary>
     public static class Const
     {
@@ -23,9 +23,9 @@ namespace Cano
         public static string BaseDirectory = System.AppDomain.CurrentDomain.BaseDirectory;
 
         /// <summary>
-        /// GiveMeATxtFile
+        /// 给我一个文本文件
         /// </summary>
-        public static string GiveMeATxtFile = Path.Combine(BaseDirectory, DateTime.Format1 + ".txt");
+        public static string GiveMeATxtFile = Path.Combine(BaseDirectory, DateTime.Format1 + ".txt");  
     }
 
     /// <summary>

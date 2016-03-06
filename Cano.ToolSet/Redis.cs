@@ -9,9 +9,10 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cano.ToolSet
+namespace Cano
 {
     /// <summary>
+    /// Cano: Redis API
     /// 本文件内容及实现基于:http://andrew-bn.github.io/RedisBoost/
     /// </summary>
     public static class Redis

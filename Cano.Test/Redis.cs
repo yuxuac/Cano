@@ -1,4 +1,4 @@
-﻿using Cano.ToolSet;
+﻿using Cano;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RedisBoost;
 using System;

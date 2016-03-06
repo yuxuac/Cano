@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Cano.ToolSet;
+using Cano;
 namespace Cano.Test
 {
     class Program
     {
         static void Main(string[] args)
         {
-
+            Log.Write.Error("Hello, I am log.");
         }
     }
 }
