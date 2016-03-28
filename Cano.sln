@@ -1,13 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cano.ToolSet", "Cano.ToolSet\Cano.ToolSet.csproj", "{52758AE3-EF89-45F2-9FDE-DAD9D213E6AF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cano.Demo", "Cano.Demo\Cano.Demo.csproj", "{64DF0DF2-33AC-484F-809A-EBA8C2831E57}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cano.Test", "Cano.Test\Cano.Test.csproj", "{C88EE29D-AC1F-47A5-BB6C-067FF6A16C2C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cano.Log", "Cano.Log\Cano.Log.csproj", "{C780E5CA-48AA-4E3C-ACBB-7DC6EB9C4102}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cano.Redis", "Cano.Redis\Cano.Redis.csproj", "{2AE1D8A0-48B5-446E-9770-9BB8881D4ED3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +31,14 @@ Global
 		{C88EE29D-AC1F-47A5-BB6C-067FF6A16C2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C88EE29D-AC1F-47A5-BB6C-067FF6A16C2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C88EE29D-AC1F-47A5-BB6C-067FF6A16C2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C780E5CA-48AA-4E3C-ACBB-7DC6EB9C4102}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C780E5CA-48AA-4E3C-ACBB-7DC6EB9C4102}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C780E5CA-48AA-4E3C-ACBB-7DC6EB9C4102}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C780E5CA-48AA-4E3C-ACBB-7DC6EB9C4102}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2AE1D8A0-48B5-446E-9770-9BB8881D4ED3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AE1D8A0-48B5-446E-9770-9BB8881D4ED3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AE1D8A0-48B5-446E-9770-9BB8881D4ED3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AE1D8A0-48B5-446E-9770-9BB8881D4ED3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

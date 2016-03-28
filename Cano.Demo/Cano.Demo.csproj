@@ -53,6 +53,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Cano.Log\Cano.Log.csproj">
+      <Project>{c780e5ca-48aa-4e3c-acbb-7dc6eb9c4102}</Project>
+      <Name>Cano.Log</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cano.Redis\Cano.Redis.csproj">
+      <Project>{2ae1d8a0-48b5-446e-9770-9bb8881d4ed3}</Project>
+      <Name>Cano.Redis</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Cano.ToolSet\Cano.ToolSet.csproj">
       <Project>{52758ae3-ef89-45f2-9fde-dad9d213e6af}</Project>
       <Name>Cano.ToolSet</Name>
